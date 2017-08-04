@@ -14,5 +14,5 @@ steps:
     title: Building Docker Image
     type: build
     image_name: parkhubprime/test-${{CF_REPO_NAME}}
-    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}} ${{IMAGE_VERSION}}
     dockerfile: Dockerfile
