@@ -11,8 +11,8 @@ steps:
     commands:
       - cf_export IMAGE_VERSION=$(npm --loglevel silent run ver)
   FinalBuild:
-      title: Building Docker Image
-      type: build
-      image_name: parkhubprime/test-${{CF_REPO_NAME}}
-      tag: ${{CF_BRANCH_TAG_NORMALIZED}}
-      dockerfile: Dockerfile
+    title: Building Docker Image
+    type: build
+    image_name: parkhubprime/test-${{CF_REPO_NAME}}
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    dockerfile: Dockerfile
