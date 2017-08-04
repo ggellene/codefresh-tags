@@ -1,17 +1,18 @@
 version: '1.0'
 steps:
-  FinalBuild:
-    title: Building Docker Image
+  Init:
+    title: Build a basic image to get metadata from
     type: build
     image_name: parkhubprime/test-${{CF_REPO_NAME}}
-    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     dockerfile: Dockerfile
   Metadata:
     title: Get image metadata
-    image: ${{FinalBuild}}
+    image: ${{Init}}
     commands:
       - cf_export IMAGE_VERSION=$(npm --loglevel silent run ver)
-  TagImage:
-    title: Tagging image with build metadata
-    image: ${{FinalBuild}}
-    tag: ${{IMAGE_VERSION}}
+  FinalBuild:
+      title: Building Docker Image
+      type: build
+      image_name: parkhubprime/test-${{CF_REPO_NAME}}
+      tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+      dockerfile: Dockerfile
