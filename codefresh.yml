@@ -1,18 +1,22 @@
 version: '1.0'
 steps:
-  Init:
-    title: Build a basic image to get metadata from
+  FinalBuild:
+    title: Build Docker Image
     type: build
-    image_name: parkhubprime/test-${{CF_REPO_NAME}}
+    image_name: gregorygellene/${{CF_REPO_NAME}}
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     dockerfile: Dockerfile
   Metadata:
     title: Get image metadata
     image: ${{Init}}
     commands:
       - cf_export IMAGE_VERSION=$(npm --loglevel silent run ver)
-  FinalBuild:
-    title: Building Docker Image
-    type: build
-    image_name: parkhubprime/test-${{CF_REPO_NAME}}
-    tag: ${{CF_BRANCH_TAG_NORMALIZED}} ${{IMAGE_VERSION}}
-    dockerfile: Dockerfile
+      - cf_export IMAGE_NAME=$(npm --loglevel silent run name)
+  TagImage:
+    type: push
+    title: Tag image and push
+    candidate: ${{FinalBuild}}
+    registry: cfcr
+    tags:
+      - ${{IMAGE_VERSION}}
+      - ${{IMAGE_NAME}}
