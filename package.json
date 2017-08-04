@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ver": "echo $npm_package_version"
+    "ver": "echo $npm_package_version",
+    "name": "echo $npm_package_name"
   },
   "author": "",
   "license": "ISC"

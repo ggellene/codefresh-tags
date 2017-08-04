@@ -1,3 +1,5 @@
 FROM node:8-alpine
 
-ENTRYPOINT ["npm", "--loglevel", "silent", "run", "ver"]
+COPY . .
+
+CMD ["npm", "--loglevel", "silent", "run", "ver"]
