@@ -8,7 +8,7 @@ steps:
     dockerfile: Dockerfile
   Metadata:
     title: Get image metadata
-    image: ${{Init}}
+    image: ${{FinalBuild}}
     commands:
       - cf_export IMAGE_VERSION=$(npm --loglevel silent run ver)
       - cf_export IMAGE_NAME=$(npm --loglevel silent run name)
